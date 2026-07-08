@@ -19,6 +19,13 @@ class User(AbstractUser):
         verbose_name="Телефон",
         help_text="Введите номер телефона",
     )
+    is_librarian = models.BooleanField(
+        blank=True,
+        null=True,
+        default=False,
+        verbose_name="Библиотекарь",
+        help_text="Отметьте, если пользователь является библиотекарем",
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
