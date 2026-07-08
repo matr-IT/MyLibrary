@@ -17,7 +17,6 @@ DEBUG = True if os.getenv("DEBUG") == "True" else False
 ALLOWED_HOSTS = ["*"]
 
 
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -29,18 +28,16 @@ INSTALLED_APPS = [
     "library",
     "rest_framework",
     "rest_framework_simplejwt",
-
-
+    "drf_yasg",
+    "django_filters",
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-
     ),
 }
-
 
 
 SIMPLE_JWT = {
@@ -78,7 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -89,7 +85,6 @@ DATABASES = {
         "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -115,7 +110,6 @@ TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 STATIC_URL = "static/"
