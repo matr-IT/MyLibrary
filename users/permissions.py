@@ -33,3 +33,21 @@ class IsLibrarian(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         # При проверке конкретного объекта библиотекарь тоже имеет доступ
         return self._is_librarian(request)
+
+
+class IsOwnerOrLibrarian(permissions.BasePermission):
+    """
+    Разрешает доступ только владельцу профиля или библиотекарю.
+    Комбинирует IsOwner и IsLibrarian с OR логикой.
+    """
+
+    def has_permission(self, request, view):
+        if not request.user or not request.user.is_authenticated:
+            return False
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        # Доступ если владелец или библиотекарь
+        is_owner = obj == request.user
+        is_librarian = request.user.groups.filter(name="librarians").exists()
+        return is_owner or is_librarian
